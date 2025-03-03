@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost, editPost } from '../store/actions/postActions';
+import { addPost, editPost, cancelEdit } from '../store/actions/postActions';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,10 @@ const PostForm = () => {
     }
   }, [editPostData]);
 
+  const handleCancelEdit = ()=>{
+    dispatch(cancelEdit())
+    setPostContent('')
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (postContent.trim()){
@@ -28,7 +32,7 @@ const PostForm = () => {
 }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='post-form' onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Enter Post"
@@ -36,6 +40,7 @@ const PostForm = () => {
         onChange={(e) => setPostContent(e.target.value)}
       />
       <button type="submit">{editPostData ? 'Update' : 'Add'} Post</button>
+      {editPostData && <button type='button' onClick={handleCancelEdit}>Cancel</button> }
     </form>
   );
 };
