@@ -5,6 +5,7 @@ export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const SET_EDIT_POST = 'SET_EDIT_POST';
+export const CANCEL_EDIT='CACEL_EDIT';
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
@@ -23,10 +24,7 @@ export const deletePost = (id) => async (dispatch) => {
   dispatch({ type: DELETE_POST, payload: id });
 };
 
-// export const editPost = (id, updatedPost) => async (dispatch) => {
-//   const response = await axios.put(`${API_URL}/${id}`, updatedPost);
-//   dispatch({ type: EDIT_POST, payload: response.data });
-// };
+
 
 export const editPost = (id, updatedPost) => async (dispatch) => {
   try {
@@ -43,3 +41,7 @@ export const setEditPost = (post) => ({
   type: SET_EDIT_POST,
   payload: post,
 });
+
+export const cancelEdit = ()=>({
+  type: CANCEL_EDIT,
+})
